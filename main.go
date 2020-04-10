@@ -1,16 +1,15 @@
-// The cmd command starts an HTTP server.
 package main
 
 import (
 	"fmt"
 	"log"
+	"main/samplefunctions"
 	"net/http"
-
-	"github.com/GoogleCloudPlatform/golang-samples/functions/codelabs/gopher"
 )
 
 func main() {
-	http.HandleFunc("/", gopher.Gopher)
+	http.HandleFunc("/HelloWorld", samplefunctions.HelloWorld)
+	http.HandleFunc("/AlwaysError", samplefunctions.AlwaysError)
 	fmt.Println("Listening on localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

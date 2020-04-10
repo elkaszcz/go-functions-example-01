@@ -19,3 +19,8 @@ gcloud functions deploy HelloWorld \
 ```console
 go test -v
 ```
+
+## Run local server
+```console
+./run.sh
+```

@@ -3,11 +3,21 @@ package samplefunctions
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // HelloWorld prints "Hello, world."
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello, world.")
+	if r.Method == http.MethodGet {
+		m, err := url.ParseQuery(r.URL.RawQuery)
+		if err == nil {
+			apiKey := m.Get("apiKey")
+			fmt.Println(apiKey)
+		}
+		fmt.Fprint(w, "Hello World from GET!")
+	} else {
+		http.Error(w, "405 - Method Not Allowed", http.StatusMethodNotAllowed)
+	}
 }
 
 // AlwaysError always gives an error

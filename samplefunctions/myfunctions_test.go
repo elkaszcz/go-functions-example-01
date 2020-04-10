@@ -6,13 +6,23 @@ import (
 	"testing"
 )
 
-// TestAlwaysError tests AlwaysError function
-func TestHelloWorld(t *testing.T) {
+// TestAlwaysError tests TestHelloWorld GET function
+func TestHelloWorldGET(t *testing.T) {
 	rr := httptest.NewRecorder()
 	req := httptest.NewRequest("GET", "/", nil)
 	HelloWorld(rr, req)
 	if rr.Result().StatusCode != http.StatusOK {
 		t.Errorf("HelloWorld StatusCode = %v, want %v", rr.Result().StatusCode, http.StatusOK)
+	}
+}
+
+// TestAlwaysError tests TestHelloWorld GET function
+func TestHelloWorldPOST(t *testing.T) {
+	rr := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/", nil)
+	HelloWorld(rr, req)
+	if rr.Result().StatusCode != http.StatusMethodNotAllowed {
+		t.Errorf("HelloWorld StatusCode = %v, want %v", rr.Result().StatusCode, http.StatusMethodNotAllowed)
 	}
 }
 
